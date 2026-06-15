@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Farmer Direct Supply System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter', sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+    min-height:100vh;
+}
+
+/* HEADER */
+header{
+    background: linear-gradient(90deg, #2e7d32, #43a047);
+    color:white;
+    padding:25px 20px;
+    text-align:center;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+header h1{
+    font-size:28px;
+    letter-spacing:1px;
+}
+
+header p{
+    opacity:0.9;
+    margin-top:5px;
+}
+
+/* CONTAINER */
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+/* PRODUCT GRID */
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+    gap:20px;
+    margin-top:20px;
+}
+
+/* CARD */
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 20px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 25px rgba(0,0,0,0.15);
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:15px;
+}
+
+.card h3{
+    margin-bottom:5px;
+    color:#2e7d32;
+}
+
+.price{
+    color:#555;
+    margin-bottom:10px;
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:linear-gradient(90deg,#43a047,#2e7d32);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+/* CART */
+.cart{
+    margin-top:30px;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.1);
+}
+
+.cart h2{
+    color:#2e7d32;
+    margin-bottom:10px;
+}
+
+#cartList{
+    list-style:none;
+    margin-bottom:10px;
+}
+
+#cartList li{
+    padding:8px;
+    border-bottom:1px solid #eee;
+}
+
+.total{
+    font-size:20px;
+    font-weight:700;
+    color:#2e7d32;
+    margin:10px 0;
+}
+
+/* ORDER BUTTON */
+.order-btn{
+    background:linear-gradient(90deg,#1b5e20,#43a047);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌾 Farmer Direct Supply System</h1>
+    <p>Fresh Harvest Directly from Farmers to You</p>
+</header>
+
+<div class="container">
+
+<div class="products">
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=800" />
+        <div class="card-content">
+            <h3>Tomato</h3>
+            <p class="price">Rs. 300 / kg</p>
+            <button onclick="addToCart('Tomato',300)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1582515073490-dc6f725f2f2f?w=800" />
+        <div class="card-content">
+            <h3>Potato</h3>
+            <p class="price">Rs. 180 / kg</p>
+            <button onclick="addToCart('Potato',180)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800" />
+        <div class="card-content">
+            <h3>Carrot</h3>
+            <p class="price">Rs. 350 / kg</p>
+            <button onclick="addToCart('Carrot',350)">Add to Cart</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="cart">
+    <h2>🛒 Your Cart</h2>
+    <ul id="cartList"></ul>
+    <div class="total">Total: Rs. <span id="total">0</span></div>
+    <button class="order-btn" onclick="placeOrder()">Place Order</button>
+</div>
+
+</div>
+
+<script>
+let total = 0;
+
+function addToCart(name, price){
+    const li = document.createElement("li");
+    li.textContent = `${name} - Rs. ${price}`;
+    document.getElementById("cartList").appendChild(li);
+
+    total += price;
+    document.getElementById("total").innerText = total;
+}
+
+function placeOrder(){
+    if(total === 0){
+        alert("Your cart is empty!");
+        return;
+    }
+
+    alert("🎉 Order placed successfully!");
+    document.getElementById("cartList").innerHTML = "";
+    total = 0;
+    document.getElementById("total").innerText = "0";
+}
+</script>
+
+</body>
+</html>
